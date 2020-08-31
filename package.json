@@ -1,13 +1,15 @@
 {
   "name": "boilerplate",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "build/index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "concurrently \"parcel watch src/client/index.html\" \"nodemon src/server/index.ts\"",
-    "build": "parcel build src/client/index.html",
+    "clean": "rm -rf build && rm -rf dist",
+    "dev": "yarn clean && concurrently \"parcel watch src/client/index.html\" \"nodemon src/server/index.ts\"",
+    "build": "yarn clean && parcel build src/client/index.html && tsc",
     "migrate": "ts-node src/server/data/migrations/index.ts",
-    "migrate:down": "ts-node src/server/data/migrations/index.ts down"
+    "migrate:down": "ts-node src/server/data/migrations/index.ts down",
+    "start": "node build/index.js"
   },
   "devDependencies": {
     "@types/express": "^4.17.7",

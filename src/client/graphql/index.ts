@@ -28,3 +28,5 @@ export default new ApolloClient({
   link,
   cache: new InMemoryCache(),
 });
+
+export type GraphQL = ApolloClient<InMemoryCache>;

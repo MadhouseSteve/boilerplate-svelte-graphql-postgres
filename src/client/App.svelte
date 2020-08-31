@@ -1,43 +1,41 @@
 <script lang="typescript">
-  import { ApolloClient, gql } from "apollo-boost";
+  import Error404 from "./pages/errors/Error404.svelte";
 
-  export let gqlClient: ApolloClient<unknown>;
+  import { setContext } from "svelte";
+  import { GraphQL } from "./graphql";
 
-  const query = gql`
-    {
-      books {
-        title
-        author
+  export let gqlClient: GraphQL;
+  setContext("graphql", gqlClient);
+
+  import router from "./router";
+
+  const route = Object.keys(router)
+    .map((m) => {
+      const params = m.match(/:[^\s/]+/g);
+      let routeMatcher = new RegExp(
+        "^" + m.replace(/:[^\s/]+/g, "([\\w-]+)") + "$"
+      );
+      const match = window.location.pathname.match(routeMatcher);
+      if (match) {
+        let filledParams = {};
+        if (params) {
+          for (let i = 0; i < params.length; i++) {
+            filledParams[params[i].substr(1)] = match[i + 1];
+          }
+        }
+
+        return {
+          Component: router[m],
+          Params: filledParams,
+        };
+      } else {
+        return null;
       }
-    }
-  `;
+    })
+    .filter((m) => m);
 
-  const subscriptionQuery = gql`
-    subscription {
-      bookAdded {
-        title
-        author
-      }
-    }
-  `;
-
-  interface Book {
-    title: string;
-    author: string;
-  }
-
-  let books = [];
-
-  const response = gqlClient.query<{ books: Book[] }>({ query });
-  response.then((data) => (books = data.data.books));
-
-  const subscription = gqlClient.subscribe<{ bookAdded: Book }>({
-    query: subscriptionQuery,
-  });
-  subscription.subscribe((data) => {
-    books.push(data.data.bookAdded);
-    books = books;
-  });
+  const Component = route.length ? route[0].Component : null;
+  const ComponentParams = route.length ? route[0].Params : null;
 </script>
 
 <style>
@@ -47,6 +45,8 @@
   }
 </style>
 
-{#each books as book}
-  <p>{book.title} by {book.author}</p>
-{/each}
+{#if Component}
+  <Component {...ComponentParams} />
+{:else}
+  <Error404 />
+{/if}
