@@ -10,4 +10,6 @@ Todo:
   ✔ Add routing method @started(20-08-31 11:57) @done(20-08-31 12:34) @lasted(37m56s)
   ☐ Database migrations reset
   ☐ Docker-compose for dev
+  ☐ Re-factor into framework
+  ☐ Remove dummy data
   ☐ Tests
