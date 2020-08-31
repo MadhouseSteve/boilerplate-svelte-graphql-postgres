@@ -1,0 +1,7 @@
+
+Todo:
+  ✔ Refactor GraphQL server @started(20-08-30 22:22) @done(20-08-30 22:29) @lasted(7m52s)
+  ✔ Add GraphQL client @started(20-08-30 22:30) @done(20-08-30 23:39) @lasted(1h9m20s)
+  ✔ Database connect @started(20-08-30 23:46) @done(20-08-30 23:56) @lasted(10m3s)
+  ✔ Database migrations @started(20-08-30 23:19) @done(20-08-31 00:57) @lasted(1h38m41s)
+  ✔ Database migrations down @started(20-08-31 00:57) @done(20-08-31 01:10) @lasted(13m12s)
