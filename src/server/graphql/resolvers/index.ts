@@ -1,38 +1,21 @@
 import { PubSub } from "apollo-server-express";
 
-const pubsub = new PubSub();
-const BOOK_ADDED = "BOOK_ADDED";
+import booksQuery from "./query/books";
+import booksMigration from "./migration/books";
+import booksSubscription from "./subscription/books";
 
-const books = [
-  {
-    title: "Harry Potter and the Chamber of Secrets",
-    author: "J.K. Rowling",
-  },
-  {
-    title: "Jurassic Park",
-    author: "Michael Crichton",
-  },
-];
+export const pubsub = new PubSub();
+export const BOOK_ADDED = "BOOK_ADDED";
 
 const resolvers = {
   Query: {
-    books: (_a, _b, ctx) => {
-      console.log(ctx.database);
-      return books;
-    },
+    books: booksQuery,
   },
   Mutation: {
-    addBook: () => {
-      let book = {
-        title: "A",
-        author: "B",
-      };
-      pubsub.publish(BOOK_ADDED, { bookAdded: book });
-      return book;
-    },
+    addBook: booksMigration,
   },
   Subscription: {
-    bookAdded: { subscribe: () => pubsub.asyncIterator([BOOK_ADDED]) },
+    bookAdded: booksSubscription,
   },
 };
 
