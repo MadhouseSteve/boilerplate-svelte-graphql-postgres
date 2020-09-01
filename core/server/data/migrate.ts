@@ -1,8 +1,11 @@
 import { config } from "dotenv";
 config();
 
+import { resolve } from "path";
 import { readdirSync } from "fs";
-import database from "../../data";
+import database from "./index";
+
+const baseDir = resolve(__dirname, "../../../src/migrations");
 
 interface Migration {
   version: number;
@@ -48,7 +51,7 @@ async function applyMigrations(
   for (let migrationFile of toRun) {
     console.log(`Applying ${migrationFile}`);
 
-    const migration = require(`./${migrationFile}`);
+    const migration = require(`${baseDir}/${migrationFile}`);
     if (direction === "UP") {
       await migration.up(database.connection);
       await database.connection.query(
@@ -76,7 +79,7 @@ async function run() {
     (v, m) => Math.max(m.version, v),
     0
   );
-  const allMigrations = readdirSync(__dirname)
+  const allMigrations = readdirSync(baseDir)
     .filter((file) => file !== "index.ts")
     .sort((a, b) => +a.split("-")[0] - +b.split("-")[0]);
   const runMigrations = calculateMigrationsToRun(

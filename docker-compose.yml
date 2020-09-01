@@ -1,0 +1,25 @@
+version: "3.4"
+
+services:
+  web:
+    build: .
+    image: fatcat
+    ports:
+      - 3000:3000
+      - 1234:1234
+    environment:
+      - PGUSER=fatcat
+      - PGPASSWORD=fatcat
+      - PGDATABASE=fatcat
+      - PGHOST=db
+    volumes:
+      - ./:/src
+    command: bash -c "yarn && yarn dev"
+  db:
+    image: postgres
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD=fatcat
+      - POSTGRES_USER=fatcat
+      - POSTGRES_DB=fatcat

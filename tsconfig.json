@@ -3,5 +3,5 @@
     "esModuleInterop": true,
     "outDir": "build"
   },
-  "include": ["src/server/**/*.ts"]
+  "include": ["core/server/**/*.ts", "src/resolvers/**/*.ts"]
 }

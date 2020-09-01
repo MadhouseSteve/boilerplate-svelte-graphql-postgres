@@ -1,5 +1,5 @@
 <script lang="typescript">
-  import Error404 from "./pages/errors/Error404.svelte";
+  import Error404 from "../../src/pages/errors/Error404.svelte";
 
   import { setContext } from "svelte";
   import { GraphQL } from "./graphql";
@@ -7,7 +7,7 @@
   export let gqlClient: GraphQL;
   setContext("graphql", gqlClient);
 
-  import router from "./router";
+  import router from "../../src/router";
 
   const route = Object.keys(router)
     .map((m) => {

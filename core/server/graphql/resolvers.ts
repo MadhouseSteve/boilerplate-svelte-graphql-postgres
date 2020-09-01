@@ -5,25 +5,27 @@ import { resolve, basename } from "path";
 export const pubsub = new PubSub();
 export const BOOK_ADDED = "BOOK_ADDED";
 
+const basePath = resolve(__dirname, "../../../src/resolvers");
+
 let Query = {};
-for (let query of readdirSync(resolve(__dirname, "./query"))) {
+for (let query of readdirSync(resolve(`${basePath}/query`))) {
   Query[
     basename(basename(query, ".ts"), ".js")
-  ] = require(`./query/${query}`).default;
+  ] = require(`${basePath}/query/${query}`).default;
 }
 
 let Mutation = {};
-for (let mutation of readdirSync(resolve(__dirname, "./mutation"))) {
+for (let mutation of readdirSync(resolve(`${basePath}/mutation`))) {
   Mutation[
     basename(basename(mutation, ".ts"), ".js")
-  ] = require(`./mutation/${mutation}`).default;
+  ] = require(`${basePath}/mutation/${mutation}`).default;
 }
 
 let Subscription = {};
-for (let subscription of readdirSync(resolve(__dirname, "./subscription"))) {
+for (let subscription of readdirSync(resolve(`${basePath}/subscription`))) {
   Subscription[
     basename(basename(subscription, ".ts"), ".js")
-  ] = require(`./subscription/${subscription}`).default;
+  ] = require(`${basePath}/subscription/${subscription}`).default;
 }
 
 const resolvers = {

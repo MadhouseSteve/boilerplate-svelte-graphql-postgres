@@ -8,8 +8,8 @@ Todo:
   ✔ Hook up resolvers to database in example data @started(20-08-31 01:13) @done(20-08-31 01:22) @lasted(9m30s)
   ✔ Detect resolvers automatically @started(20-08-31 11:29) @done(20-08-31 11:29) @lasted(19s)
   ✔ Add routing method @started(20-08-31 11:57) @done(20-08-31 12:34) @lasted(37m56s)
-  ☐ Database migrations reset
-  ☐ Docker-compose for dev
-  ☐ Re-factor into framework
+  ✔ Re-factor into framework @started(20-09-01 18:54) @done(20-09-01 19:15) @lasted(21m9s)
+  ✔ Helper script to create migration @started(20-09-01 18:59) @done(20-09-01 19:24) @lasted(13s)
+  ✔ Docker-compose for dev @done(20-09-01 20:18)
   ☐ Remove dummy data
   ☐ Tests

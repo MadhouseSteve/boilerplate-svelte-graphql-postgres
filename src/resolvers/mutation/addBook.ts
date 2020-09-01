@@ -1,4 +1,4 @@
-import { pubsub, BOOK_ADDED } from "..";
+import { pubsub, BOOK_ADDED } from "../../../core/server/graphql/resolvers";
 
 interface Args {
   title: string;

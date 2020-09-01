@@ -1,7 +1,7 @@
 <script lang="typescript">
   import { getContext } from "svelte";
   import { gql } from "apollo-boost";
-  import { GraphQL } from "../graphql";
+  import { GraphQL } from "../../core/client/graphql";
 
   const query = gql`
     {
@@ -16,4 +16,4 @@
   graphql.query({ query });
 </script>
 
-Homepage
+Homepage!

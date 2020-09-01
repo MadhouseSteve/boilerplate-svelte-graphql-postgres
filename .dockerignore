@@ -1,0 +1,6 @@
+yarn-error.log
+/dist
+/.cache
+/node_modules
+.env
+/build
